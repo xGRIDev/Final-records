@@ -1,0 +1,31 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class md_studio extends CI_Model {
+    
+    function show_data()
+	{
+		$this->db->select('*');
+		//$this->db->join('member', 'transaksi_sewa.id_member = member.id_member','left');
+		//$this->db->join('studio', 'transaksi_sewa.id_studio = studio.id_studio','left');
+		return $this->db->get('studio');
+	}
+
+	public function save_data($data,$table)
+    {
+        $this->db->insert($table,$data);
+	}
+	
+	function delete_data($where,$table){
+		$this->db->where($where);
+		$this->db->delete($table);
+	}
+	function edit_data($where,$table){		
+		return $this->db->get_where($table,$where);
+	}
+	function update_data($where,$data,$table){
+		$this->db->where($where);
+		$this->db->update($table,$data);
+	}
+	
+}
