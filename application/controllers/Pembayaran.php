@@ -39,19 +39,21 @@ class Pembayaran extends CI_Controller {
 		$keterangan= $this->input->post('keterangan');
 		$nominal_bayar= $this->input->post('nominal_bayar');
 
-		$data = array(
-			'status_bayar' => $status_bayar,
+		
+			$data = [
+				'status_bayar' => $status_bayar,
 			'keterangan' => $keterangan,
 			'nominal_bayar' => $nominal_bayar,
-			);
-
-		$where = array('id_bayar' => $id_bayar);
+			];
+		$where = ['id_bayar' => $id_bayar];
+		
 		$this->md_pembayaran->update_data($where,$data,'paid');
-		redirect('admin/pembayaran/');
+		redirect('payment/v_pembayaran', $data);
 	}
 
 	public function edit($id_bayar)
 	{
+		
 		$data['title'] = "Payment Edit || Final - Records";
 		$data['session'] = $this->session->userdata();
 		$data['pembayaran'] = $this->md_pembayaran->edit_data($id_bayar,'paid')->result();

@@ -33,6 +33,7 @@ $route['studio'] = 'studio/index';
 $route['studio/add_studio']['get'] = 'studio/add_studio';
 $route['studio/edit_studio'] = 'studio/edit';
 
+
 //booking
 $route['booking']['get'] = 'booking/index';
 $route['booking']['post'] = 'booking/booking_save';
@@ -58,6 +59,15 @@ $route['admin/payment/update'] = 'pembayaran/update';
 
 //Laporan
 $route['report'] = 'report/index';
+$route['report/filter'] = 'report/filter';
+
+//Transaksi
+$route['admin/transaksi/edit'] = 'transaksi/edit';
+
+$route['admin/transaksi/delete'] = 'transaksi/delete';
+
+$route['transaksi/'] = 'transaksi/index';
+
 
 
 

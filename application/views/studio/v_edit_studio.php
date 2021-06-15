@@ -107,6 +107,7 @@
     <img src="<?php echo base_url();?>/assets/studio/<?php echo $u->gambar ?>" class="img-thumbnail" width="50%">
   </div>
   <button type="submit" class="btn btn-success">UPDATE</button>
+  <span><a class="btn btn-danger btn-sm" href="<?= base_url('studio/delete/') ?><?= $u->id_studio?>">Delete</a></span>
 </form>
 <?php 
   }
@@ -139,7 +140,38 @@
   <script src="<?= base_url(); ?>assets/vendor/typed.js/typed.min.js"></script>
   <script src="<?= base_url(); ?>assets/vendor/waypoints/noframework.waypoints.js"></script>
   <script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>
+  
+  <script src="<?= base_url(); ?>assets/js/jquery-3.6.0.min.js"></script>
   <script src="<?= base_url(); ?>assets/js/main.js"></script>
+  <script>
+  $('.btn-danger').on('click', function(e){
+    e.preventDefault();
+    const href = $(this).attr('href');
+    Swal.fire({
+  title: 'Delete This Content ?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.value){
+  document.location.href = href;
+}
+})
+  })
+    $('#btn').on('click', function(){
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  }
+});
+
+  </script>
   
 </body>
 

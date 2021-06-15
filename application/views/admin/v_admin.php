@@ -49,6 +49,7 @@
         <li><a href="<?= base_url('studio');?>" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Studio</span></a></li>
         <li><a href="<?= base_url('/jam');?>" class="nav-link scrollto"><i class="bx bx-time"></i> <span>Schedule</span></a></li>
         <li><a href="<?= base_url('/pembayaran');?>" class="nav-link scrollto"><i class="bx bx-money"></i> <span>Payment</span></a></li>
+        <li><a href="<?= base_url('/transaksi');?>" class="nav-link scrollto"><i class="bx bx-money"></i> <span>Transaction</span></a></li>
         <li><a href="<?= base_url('/report');?>" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Report</span></a></li>
         <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
         <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>

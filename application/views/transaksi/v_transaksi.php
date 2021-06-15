@@ -40,6 +40,14 @@
   <!-- ======= Mobile nav toggle button ======= -->
   <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+   <!-- ======= Hero Section ======= -->
+   <section id="hero" class="d-flex flex-column justify-content-center">
+    <div class="container" data-aos="zoom-in" data-aos-delay="100">
+      <h1>Transaction</h1>
+      <p>transaction - page <span class="typed" data-typed-items="Final - Records"></span></p>
+    </div>
+  </section><!-- End Hero -->
+
   <!-- ======= Header ======= -->
   <header id="header" class="d-flex flex-column justify-content-center">
 
@@ -58,72 +66,88 @@
   <!-- ======= Contact Section ======= -->
   <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
-      <!-- Begin Page Content -->
+
+<!-- Begin Page Content -->
 <div class="container-fluid">
-
-<!-- Page Heading -->
-
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
-  <div class="card-header py-3">
-  <h4>Pembayaran Edit</h4>
+<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+  <h6 class="m-0 font-weight-bold text-primary">Data Transaksi - Tanggal <?= date('d-m-Y') ?></h6>
   </div>
   <div class="card-body">
-
-  <?php foreach($pembayaran as $u){ ?>
-  <form method="POST" action="<?=base_url('pembayaran/update') ?>">
-  <input type="hidden" name="id_bayar" value="<?php echo $u->id_bayar ?>">
-  <div class="form-group">
-    <label>Nomor Transaksi</label>
-    <input type="text" class="form-control" name="id_transaksi" value="<?php echo $u->id_transaksi ?>" readOnly>
-  </div>
-  <div class="form-group">
-    <label>Tipe Pembayaran</label>
-    <input type="text" class="form-control"  value="<?php echo $u->tipe_bayar; ?>" readOnly>
-  </div>
- 
-  <div class="form-group">
-    <label>Total Harga Sewa</label>
-    <input type="text" class="form-control"  value="<?php echo $u->tarif; ?>" readOnly>
-  </div>
-  <div class="form-group">
-    <label>Nominal Transfer</label>
-    <input type="text" class="form-control"  name="nominal_bayar" value="<?php echo $u->nominal_bayar; ?>">
-  </div>
-  <div class="form-group">
-    <label>Kekurangan</label>
-    <?php $kurang=($u->tarif-$u->nominal_bayar); ?>
-    <input type="text" class="form-control"  value="<?= $kurang; ?>" readOnly>
-  </div>
-
-  <div class="form-group">
-    <label>Bukti Transfer</label></br>
-    <img src="<?php echo base_url('../assets/images/bukti_bayar/');?>" class="img-fluid">
-  </div>
-  <div class="form-group">
-    <label>Status Pembayaran</label>
-    <select name="status_bayar" class="form-control">
-      <option value="peninjauan">PENINJAUAN</option>
-      <option value="terima">TERIMA</option>
-      <option value="tolak">TOLAK</option>
-</select>
-<div class="form-group">
-<div class="form-group">
-    <label >Keterangan</label>
-    <textarea class="form-control" name="keterangan" rows="3" placeholder="Masukan Keterangan tambahan jika perlu"><?= $u->keterangan ?></textarea>
-  </div>
-  </div>
-  </div> 
-  <button type="submit" class="btn btn-success">UPDATE</button>
-  <a href="<?= base_url('transaksi/edit/')?>" class="btn btn-danger">RUBAH STATUS BOOKING</a>
-  
-</form>
-<?php } ?>
+    <div >
+      <table class="table table-bordered table-responsive" id="dataTable">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>ID TRANSAKSI</th>
+            <th>Nama Studio</th>
+            <th>Jam Sewa</th>
+            <th>Nama Member</th>
+            <th>Tarif</th>
+            <th>Status Pemesanan</th>
+            <th>Status Bayar</th>
+            <th>Aksi</th>
+          
+          </tr>
+        </thead>
+    
+        <tbody>
+        <?php 
+		$no = 1;
+		foreach($transaksi as $u){ 
+		?>
+          <tr>
+            <td><?= $no++ ?></td>
+            <td><?= $u->id_transaksi ?></td>
+            <td><?= $u->nama_studio ?></td>
+            <td><?= $u->jam ?></td>
+            <td><?= $u->id_member ?></td>
+            <td><?= $u->tarif ?></td>
+            <td>
+        <?php if($u->status_sewa=="booking") { ?>  
+          <span class="badge badge-primary"><?php echo $u->status_sewa ?></span>
+        <?php } ?>
+        <?php if($u->status_sewa=="selesai") { ?>  
+          <span class="badge badge-success"><?php echo $u->status_sewa ?></span>
+        <?php } ?>
+        <?php if($u->status_sewa=="batal") { ?>  
+          <span class="badge badge-danger"><?php echo $u->status_sewa ?></span>
+      
+        <?php } ?>
+      </td>
+      <td>
+        <?php if($u->status_bayar=="peninjauan") { ?>  
+          <span class="badge badge-warning" style="color: black;"><?php echo $u->status_bayar ?></span>
+        <?php } ?>
+        <?php if($u->status_bayar=="tolak") { ?>  
+          <span class="badge badge-danger"><?php echo $u->status_bayar ?></span>
+        <?php } ?>
+        <?php if($u->status_bayar=="terima") { ?>  
+          <span class="badge badge-success"><?php echo $u->status_bayar ?></span>
+        <?php } ?>
+        
+      </td>
+            <td>
+            <a href="<?= base_url('transaksi/edit/')?><?= trim($u->id_transaksi) ?>" class="btn btn-success btn-circle btn-sm">
+                    <i class="fas fa-edit">Edit</i>
+                  </a>
+         
+              <a href="<?= base_url('transaksi/delete/') ?><?= trim($u->id_transaksi)?>" class="btn btn-danger btn-circle btn-sm">
+                    <i class="fas fa-trash">Delete</i>
+                  </a>
+            </td>
+          </tr>
+          <?php } ?>
+      </table>
+    </div>
   </div>
 </div>
 
 </div>
 <!-- /.container-fluid -->
+
+
       </div>
     </section>
 

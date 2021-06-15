@@ -85,4 +85,10 @@ class Studio extends CI_Controller {
 		$this->load->view('studio/v_edit_studio',$data);
        
 	}
+    public function delete($id_studio)
+	{
+        $where = array('id_studio' => $id_studio);
+		$this->md_studio->delete_data($where,'studio');
+        redirect('admin');
+    }
 }

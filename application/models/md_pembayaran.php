@@ -21,7 +21,7 @@ class md_pembayaran extends CI_Model {
 
     public function update_data($where, $table, $data)
     {
-        $this->db->update($table, $data);
+        $this->db->update($where,$table, $data);
         $this->db->where($where);
     }
 

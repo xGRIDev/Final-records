@@ -26,4 +26,19 @@ class Report extends CI_Controller {
         $data['title'] = "Report || Final - Studio";
         $this->load->view('report/report_v', $data);
     }
-}
+
+	public function filter()
+	{
+		$tgl_awal 	= $this->input->post('tgl_awal', true);
+		$tgl_akhir 	= $this->input->post('tgl_akhir', true);
+		$post = [
+			'date1' => $tgl_awal,
+			'date2' => $tgl_akhir
+		];
+		$data['laporan'] = $this->md_report->date_filter($post)->result();
+		// print('<pre>');print_r($data);exit();
+		$this->load->view('report/report_v',$data);
+	}
+
+	}
+

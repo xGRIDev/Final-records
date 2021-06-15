@@ -69,7 +69,7 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 <div>
-<form action="<?=base_url('admin/laporan/filter') ?>" method="post">
+<form action="<?=base_url('report/filter') ?>" method="post">
 <label>Filter Data</label>
 <input type="date" name="tgl_awal"> s.d <input type="date" name=tgl_akhir> 
 <button type="submit" class="btn btn-primary">TERAPKAN</button>

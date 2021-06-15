@@ -21,6 +21,8 @@ class Booking extends CI_Controller {
         $data['no_invoice']=$this->md_booking->get_no_invoice();
         //$id_transaksi = $this->input->post('id_transaksi');
        // $id_member = $this->session->userdata('id_member');
+       
+       $username = $this->input->post("username");
         $data['title'] = "Booking Page || Final - Studio";
         $data['booking'] = $this->md_booking->show_data()->result();
         $data['jam'] = $this->md_booking->show_hour()->result();

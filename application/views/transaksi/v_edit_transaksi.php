@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,8 +34,8 @@
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
 </head>
-<body>
 
+<body>
 
   <!-- ======= Mobile nav toggle button ======= -->
   <!-- <button type="button" class="mobile-nav-toggle d-xl-none"><i class="bi bi-list mobile-nav-toggle"></i></button> -->
@@ -44,11 +45,8 @@
 
   <nav id="navbar" class="navbar nav-menu">
       <ul>
-        <li><a href="<?= base_url('/');?>" class="nav-link scrollto active"><i class="bx bx-home"></i><span>Home</span></a></li>
-        <!-- <li><a href="/user/u_profile.php" class="nav-link scrollto"><i class="bx bx-user"></i><span>Your Profile</span></a></li> -->
-        <li><a href="#resume" class="nav-link scrollto"><i class="bx bx-file-blank"></i> <span>Timeline</span></a></li>
-        <li><a href="#portfolio" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Portfolio</span></a></li>
-        <li><a href="#services" class="nav-link scrollto"><i class="bx bx-server"></i> <span>Services</span></a></li>
+        <li><a href="<?= base_url('/admin');?>" class="nav-link scrollto active"><i class="bx bx-home"></i><span>Home</span></a></li>
+        <li><a href="<?= base_url('studio');?>" class="nav-link scrollto"><i class="bx bx-book-content"></i> <span>Studio</span></a></li>
         <li><a href="<?= base_url('logout'); ?>" class="nav-link scrollto"><i class="bx bx-exit"></i> <span>Logout</span></a></li>
       </ul>
     </nav><!-- .nav-menu -->
@@ -56,90 +54,92 @@
 
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex flex-column justify-content-center">
-    <div class="container" data-aos="zoom-in" data-aos-delay="100">
-      <h1> </h1>
-      <p>OnlineBooking <span class="typed" data-typed-items="Final - Records Studio"></span></p>
-    </div>
-    </section>
-     <!-- ======= Contact Section ======= -->
-     <section id="contact" class="contact">
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
 
-        
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
-    <!-- ***** Features Big Item Start ***** -->
-    <section class="section" id="about2">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 mobile-bottom-fix">
-                    <div class="left-heading">
-                   
-                        <h5>FORMULIR PEMESANAN STUDIO MUSIK</h5>
-                    </div>
-                    <form method="post" action="<?=base_url('booking/booking_save') ?>">
-                    
-                    <div class="form-group">
-    <label>Nomor Transaksi</label>
-    <input type="text" class="form-control" placeholder="Masukan nama lengkap" name="id_transaksi" readOnly value="<?php echo $no_invoice;?>">
+<!-- Page Heading -->
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+<?php foreach($transaksi as $u){ ?>
+<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+  <h6 class="m-0 font-weight-bold text-primary">Data Transaksi : Nomor Transaksi - <?php echo $u->id_transaksi ?></h6>
   </div>
-                    <div class="form-group">
-    <label for="email">Nama lengkap</label>
-    <input type="text" class="form-control" placeholder="Masukan nama lengkap" name="id_member"  value="<?php echo $this->session->userdata("id_member"); ?>">
-  </div>
-
-  <div class="form-group">
-    <label for="email">Tanggal</label>
-    <input type="date" class="form-control" name="tanggal" min="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d') ?>" required>
-  </div>
-
-  <div class="form-group">
-    <label for="email">Pilih Jam :</label>
-    <select class="form-control"  name="id_jam">
-            <?php 
-
-            foreach($jam as $row)
-            { 
-              echo '<option value="'.$row->id_jam.'">'.$row->jam.'</option>';
-            
-            }
-            ?>
-            </select>
-  </div>
- 
-  <div class="form-group">
-    <label for="email">Pilih Studio :</label>
-    <select class="form-control"  name="id_studio">
-            <?php 
-
-            foreach($booking as $row)
-            { 
-              echo '<option value="'.$row->id_studio.'">'.$row->nama_studio.'-'.$row->tarif.'</option>';
-            }
-            ?>
-            </select>
-  </div>
- 
-
-  <button type="submit" class="btn btn-danger btn-block">PROSES BOOKING</button>
-</form> 
-                </div>
-                
-            </div>
-        </div>
-    </section>
-    <!-- ***** Features Big Item End ***** -->
-
-
-      </div>
-    </section><!-- End Contact Section -->
+  <div class="card-body">
 
   
-    <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <form method="POST" action="<?=base_url('admin/transaksi/update') ?>">
+  <input type="hidden" name="id_transaksi" value="<?php echo $u->id_transaksi ?>">
+  <div class="form-group">
+    <label>ID TRANSAKSI</label>
+    <input type="text" class="form-control" name="id_transaksi" value="<?php echo $u->id_transaksi ?>" readOnly>
+  </div>
+  <div class="form-group">
+    <label>Tanggal</label>
+    <input type="date" class="form-control" name="tanggal" value="<?php echo $u->tanggal ?>" readOnly>
+  </div>
+  <div class="form-group">
+    <label>Nama Member</label>
+    <input type="text" class="form-control" name="id_member" value="<?php echo $u->nama_member ?>" readOnly>
+  </div>
+  <div class="form-group">
+    <label>Jam Sewa</label>
+    <input type="text" class="form-control" name="id_jam" value="<?php echo $u->jam ?>" readOnly>
+  </div>
+  <div class="form-group">
+    <label>Studio</label>
+    <input type="text" class="form-control" name="id_studio" value="<?php echo $u->nama_studio ?>" readOnly>
+  </div>
+  <div class="card">
+  <div class="card-body">
+    <h4>TARIF STUDIO Rp. <?php echo $u->tarif ?></h4>
+  </div>
+</div>
+  <hr>
+  <div class="form-group">
+    <div div class="alert alert-danger" role="alert">
+      Sebelum melakukan perubahan status sewa, silahkan verifikasi status pembayaran dan pastikan member melakukan DP/pelunasan
+    </div>
+  </div>
+  <div class="form-group">
+  <a href="<?php echo base_url('pembayaran/edit/') ?><?php echo $u->id_bayar ?>" class="btn btn-danger btn-icon-split btn-sm pull-right btn-block">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-plus"></i>
+                    </span>
+                    <span class="text">CEK PEMBAYARAN</span>
+                  </a>
+  </div>
+  <?php if($u->status_bayar=="peninjauan") { echo ""; } else { ?>
+  <div class="form-group">
+    <label>Status Sewa</label>
+    <select name="status_sewa" class="form-control">
+      <option value="booking">BOOKING</option>
+      <option value="selesai">SELESAI</option>
+      <option value="batal">BATAL</option>
+</select>
+  </div>
+  <button type="submit" class="btn btn-success">UPDATE</button>
+  <?php  } ?>
+  
+  
+</form>
+<?php } ?>
+  </div>
+</div>
 
-  <script src="<?= base_url(); ?>assets/vendor/aos/aos.js"></script>
+</div>
+<!-- /.container-fluid -->
+
+      </div>
+    </section>
+
+
+<script src="<?= base_url(); ?>assets/vendor/aos/aos.js"></script>
   <script src="<?= base_url(); ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?= base_url(); ?>assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="<?= base_url(); ?>assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
